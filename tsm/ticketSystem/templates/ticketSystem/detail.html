@@ -1,0 +1,38 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+
+{% block title %} Заявка № {{appliation.id}} {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="main_detail">
+
+  <article id="mainArticle"><div id="inner-grid">
+
+        <div class="application_list">
+            <div class="row">
+            <div class="col-2">
+                <center>
+                <h1>{{application.id}}</h1>
+                </center>
+            </div>
+            <div class="col-10">
+           <p><h3>{{application.city}} {{appication.address}}</a></h3> </p>
+           <p><h4>{{application.customer}} {{application.customer_phone}}</h4> </p>
+           <p><h4>{{application.description}}</h4> </p>
+            <p><span>Дата подачи заявки: {{application.published}}</span></p>
+            <p><span>Срок выполнения: {{application.deadline}}</span></p>
+            </div>
+            </div>
+        </div>
+
+  </div></article>
+  <nav id="mainNav"></nav>
+  <div class="siteAds" id="siteAds"></div>
+    </div>
+    {% else %}
+    <div class="signin">
+    <h1><a href="{% url 'login:login' %}">SIGN IN</a></h1>
+    </div>
+    {% endif %}
+{% endblock %}

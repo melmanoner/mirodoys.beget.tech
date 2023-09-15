@@ -1,0 +1,170 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+
+<div class="main">
+  <article id="mainArticle">
+      <div id="inner-grid">
+
+
+<table class="table" style="margin-top: 30px; max-width:90%;">
+    <thead>
+    <tr>
+        <td colspan="2">
+            Баланс: {{user.first_name}} {{user.last_name}}
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                Полная сумма:
+            </th>
+            <td>
+                 {{balance.price}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Премия:
+            </th>
+            <td>
+                {{balance.premium}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Сдать:
+            </th>
+            <td>
+                {{balance.change}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                УКП7:
+            </th>
+            <td>
+                 {{equpiment.ykp7}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                УКП12:
+            </th>
+            <td>
+                {{equpiment.ykp12}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                RF:
+            </th>
+            <td>
+                {{equpiment.rf}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                TM:
+            </th>
+            <td>
+                {{equpiment.tm}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                MD:
+            </th>
+            <td>
+                {{equpiment.md}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Доводчики:
+            </th>
+            <td>
+                {{equpiment.door_closer}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+      {% for app in apps %}
+         <table class="table" >
+              <thead>
+              <tr>
+                  <td class="tdHeader" colspan="3">{{app.id}} - {{app.city}} {{app.address}}</td>
+                  <td class="tdHeader rightAlignText"> {{app.published}}</td>
+              </tr>
+
+              </thead>
+
+          <tbody>
+            <tr>
+                <th colspan="2">
+                    {{app.description}}
+                </th>
+                <td>
+                    {% if app.treaty %}
+                    Нужен договор
+                    {% else %}
+                    Договор не нужен
+                    {% endif %}
+                </td>
+                <td>
+                   {% if app.monetary %}
+                    {{app.price}} ₽
+                    {% else %}
+                    Бесплатно
+                    {% endif %}
+                </td>
+            </tr>
+          <tr>
+              <th>
+                  {{app.customer}}
+              </th>
+              <td>
+                  {{app.customer_phone}}
+              </td>
+              <td class="rightAlignText" colspan="2">
+                  Выполнить до: {{app.deadline}}
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2"></td>
+              <td class="rightAlignText change">
+
+                Выполнено: {{app.closing_date}}
+
+              </td>
+              <td class="rightAlignText">
+                     <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="current_app" value="{{app.id}}">
+                        <button class="close_app_btn"  name="handed_over" method="post">
+                            <span class="changeApp addLink">Посчитать</span>
+                        </button>
+                    </form>
+
+
+
+              </td>
+          </tr>
+          </tbody>
+          </table>
+      {% endfor %}
+      </div>
+  </article>
+
+  <div class="siteAds" id="siteAds"></div>
+    </div>
+
+
+{% endblock %}

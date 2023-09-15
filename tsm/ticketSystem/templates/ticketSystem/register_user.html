@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+    <form class="form_reg" method="post">
+        <h2>Регистрация</h2>
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit='Зарегестрироваться' %} {% endbuttons %}
+    </form>
+
+{% endblock %}

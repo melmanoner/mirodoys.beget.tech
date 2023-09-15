@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load bootstrap4 %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <title>Title</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='normal' %}
+</head>
+<body>
+{% if user.is_authenticated %}
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="{% url 'ticketSystem:index' %}">Окрытые заявки</a>
+  <a href="{% url 'ticketSystem:completed' %}">Закрытые заявки</a>
+  <a href="{% url 'ticketSystem:create_new_app' %}">Создать заявку</a>
+  <a href="{% url 'ticketSystem:balance' %}">Баланс/Склад</a>
+  <a href="https://docs.google.com/spreadsheets/d/1GmyAzwHqZhHnU4IzYw8rD0zIez8ZXYGqCNA-RhGYmCs/edit#gid=0">Панели</a>
+  <a href="{% url 'login:logout' %}">Выйти</a>
+
+</div>
+
+<div id="main">
+  <button id="openbtn" class="openbtn" onclick="openNav()">&#9776;</button>
+</div>
+{% endif %}
+{% block content %}
+  {% endblock %}
+<script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>

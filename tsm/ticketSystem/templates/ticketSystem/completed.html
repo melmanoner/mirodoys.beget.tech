@@ -1,0 +1,76 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+
+
+<div class="main">
+  <article id="mainArticle">
+      <div id="inner-grid">
+      {% for completed_app in completed_apps %}
+       <table class="table">
+              <thead>
+              <tr>
+                  <td class="tdHeader" colspan="3">{{completed_app.id}} - {{completed_app.city}} {{completed_app.address}}</td>
+                  <td class="tdHeader rightAlignText"> {{completed_app.published}}</td>
+              </tr>
+
+              </thead>
+
+          <tbody>
+            <tr>
+                <th colspan="2">
+                    {{completed_app.description}}
+                </th>
+                <td>
+                    {% if completed_app.treaty %}
+                    Нужен договор
+                    {% else %}
+                    Договор не нужен
+                    {% endif %}
+                </td>
+                <td>
+                   {% if completed_app.monetary %}
+                    {{completed_app.price}} ₽
+                    {% else %}
+                    Бесплатно
+                    {% endif %}
+                </td>
+            </tr>
+          <tr>
+              <th>
+                  {{completed_app.customer}}
+              </th>
+              <td>
+                  {{completed_app.customer_phone}}
+              </td>
+              <td class="rightAlignText" colspan="2">
+                  Выполнить до: {{completed_app.deadline}}
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2"></td>
+              <td class="rightAlignText change">
+
+
+
+              </td>
+              <td class="rightAlignText">
+
+                  Выполнено: {{completed_app.closing_date}}
+
+
+              </td>
+          </tr>
+          </tbody>
+          </table>
+      {% endfor %}
+      </div>
+  </article>
+  <div class="siteAds" id="siteAds"></div>
+    </div>
+
+
+{% endblock %}

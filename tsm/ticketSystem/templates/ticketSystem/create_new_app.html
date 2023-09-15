@@ -1,0 +1,16 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %} Новая заявка {% endblock %}
+{% block content %}
+<div class="create_app_body">
+<center>
+    <h2>Создать заявку</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{create_form.as_p}}
+        {% buttons submit='Создать' %} {% endbuttons %}
+    </form>
+</center>
+</div>
+{% endblock %}

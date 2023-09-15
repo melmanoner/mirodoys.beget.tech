@@ -1,0 +1,72 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+
+/* Меню бокового бара */
+.sidebar {
+  font-family: 'Roboto', sans-serif;
+  height: 100%; /* 100% высота */
+  width: 0; /* 0 ширина - изменяется с помощью JavaScript */
+  position: fixed; /* Фиксированая позиция */
+  z-index: 10; /* Поверх всех контейнеров */
+  top: 0;
+  left: 0;
+  background-color: #272125;
+  overflow-x: hidden; /* Отключить горизонтальную прокрутку */
+  padding-top: 60px;
+  transition: 0.5s; /* 0.5 секунд эффект скольжения в боковой панели */
+}
+
+/* На боковой панели */
+.sidebar a, .sidebar p{
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fffff0;
+  display: block;
+  transition: 0.3s;
+}
+.sidebar p{
+    font-size: 12px;
+}
+
+/* При наведении курсора мыши на навигационные ссылки изменяет их цвет */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Положение и стиль кнопки закрытия (верхний правый угол) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Кнопка для открытия бокового бара */
+.openbtn {
+  position:fixed;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #272125;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  z-index: 10;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Стиль содержимого страницы */
+#main {
+  transition: margin-left .5s; /* Если вы хотите эффект перехода */
+  padding: 20px;
+}
+
+/* На небольших экранах, где высота меньше 450px, изменяет стиль sidebar (меньше отступов и меньший размер шрифта) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}

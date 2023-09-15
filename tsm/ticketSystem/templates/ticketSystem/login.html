@@ -1,0 +1,35 @@
+{% extends "layout/basic.html" %}
+
+{% load bootstrap4 %}
+
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/form_login.css' %}">
+<form method="post">
+  <h2><span class="entypo-login"><i class="fa fa-sign-in"></i></span> Login</h2>
+  <button class="submit"><span class="entypo-lock"><i class="fa fa-lock"></i></span></button>
+
+
+  <span class="entypo-user inputUserIcon">
+     <i class="fa fa-user"></i>
+   </span>
+    {% csrf_token %}
+    {{form.username}}
+  <span class="entypo-key inputPassIcon">
+     <i class="fa fa-key"></i>
+   </span>
+    {{form.password}}
+    <h4><a href="{% url 'login:register' %}"> SIGN UP </a></h4>
+</form>
+
+
+
+
+
+
+
+ <script src="{% static 'js/form_login.js' %}"></script>
+
+{% endblock %}

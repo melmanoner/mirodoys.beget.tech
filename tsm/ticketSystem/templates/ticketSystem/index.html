@@ -1,0 +1,121 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+
+<div class="main">
+    <div class="headerMirodom">
+            <h3>{{user.first_name}} {{user.last_name}}</h3>
+        </div>
+  <article id="mainArticle">
+      <div id="inner-grid">
+      {% for open_app in open_apps %}
+          <table class="table">
+              <thead>
+              <tr>
+                  <td class="tdHeader" colspan="3">{{open_app.id}} - {{open_app.city}} {{open_app.address}}</td>
+                  <td class="tdHeader rightAlignText"> {{open_app.published}}</td>
+              </tr>
+
+              </thead>
+
+          <tbody>
+            <tr>
+                <th colspan="2">
+                    {{open_app.description}}
+                </th>
+                <td>
+                    {% if open_app.treaty %}
+                    Нужен договор
+                    {% else %}
+                    Договор не нужен
+                    {% endif %}
+                </td>
+                <td>
+                   {% if open_app.monetary %}
+                    {{open_app.price}} ₽
+                    {% else %}
+                    Бесплатно
+                    {% endif %}
+                </td>
+            </tr>
+          <tr>
+              <th>
+                  {{open_app.customer}}
+              </th>
+              <td>
+                  {{open_app.customer_phone}}
+              </td>
+              <td class="rightAlignText" colspan="2">
+                  Выполнить до: {{open_app.deadline}}
+              </td>
+          </tr>
+          <tr>
+              <td colspan="2"></td>
+              <td class="rightAlignText change">
+                  <button class="close_app_btn" data-toggle="modal" data-target="#ModalWindow{{open_app.id}}">
+                        <span class="changeApp addLink"> Закрыть с учетом</span>
+                    </button>
+                    <div class="modal fade" id="ModalWindow{{open_app.id}}"
+                    tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabel">
+                                        Введите количество использованного материала и укажите стоимость работ
+                                    </h5>
+                                    <button class="btn-close" type="button"
+                                    data-dismiss="modal" aria-label="Закрыть">
+                                    </button>
+                                </div>
+
+                                    <div class="modal-body">
+                                        <form action="" method="POST" name="close_app">
+
+                                                {% csrf_token %}
+                                            <input type="hidden" name="current_id" value="{{open_app.id}}">
+                                                {{form.as_p}}
+                                            <button type="submit" name="close_app" class="btn btn-primary" method="POST">Закрыть заявку</button>
+                                        </form>
+                                    </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal">
+                                        Отменить
+                                    </button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+              </td>
+              <td class="rightAlignText">
+                  <form action="" method="post">
+                            {% csrf_token %}
+                        <button class="close_app_btn" name="fast_close" method="POST">
+                            <input type="hidden" name="current_id" value="{{open_app.id}}">
+                            <span class="closeApp addlink"> Закрыть в один клик</span>
+                        </button>
+                    </form>
+
+
+              </td>
+          </tr>
+          </tbody>
+          </table>
+
+
+      {% endfor %}
+      </div>
+  </article>
+  <div class="siteAds" id="siteAds"></div>
+    </div>
+
+
+{% endblock %}
